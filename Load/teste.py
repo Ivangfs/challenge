@@ -11,24 +11,20 @@ def input_path():
         save = input ("CSV path: ")
         return (load, save)
     else:
-        print ("File not found")
+        print ("File not found or invalid")
         return input_path()
-    
-def VerifyJson(file):
-    try:
-        file
-    except ValueError as err:
-        if True :
-            print ("File corrupt ou invalid")
-            return input_path()
-        
-    
-    
    
 def load_transform_save(path_to_json_file, path_to_csv_file):
 
     with open(path_to_json_file, 'r') as List:
-        file = json.loads(List)
+        
+        try: 
+            file = json.load(List)
+        except ValueError as error:
+            print ("Json file is invalid")
+            return input_path()
+        
+        
         headers = file[0].keys()
 
     with open(path_to_csv_file, 'w') as f:
