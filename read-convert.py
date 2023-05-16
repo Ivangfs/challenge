@@ -1,11 +1,11 @@
-import json
 import csv
+import json
 
-def load_transform_save(path_to_json_file, function, path_to_csv_file):
-    pass
+json_string = '[{"firstName": "John", "lastName": "Doe", "age": 30, "city": "New York"},  {"firstName": "Jane", "lastName": "Doe", "age": 25, "city": "Chicago"}]'
+data = json.loads(json_string)
+headers = data[0].keys()
 
-def main():
-    pass
-
-if __name__ == "__main__":
-    main()
+with open('file.csv', 'w') as f:
+    writer = csv.DictWriter(f, fieldnames=headers)
+    writer.writeheader()
+    writer.writerows(data)
